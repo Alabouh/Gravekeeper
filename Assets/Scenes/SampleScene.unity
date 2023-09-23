@@ -590,13 +590,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  tiredSpeed: 1
+  normalSpeed: 5
+  sprintSpeed: 10
   offset: {x: 0, y: 0, z: 0}
   jumpForce: 15
   gravityScale: 0.2
   maxFallSpeed: 20
   Sensitivity: 2
-  candash: 0
   isGrounded: 0
+  outofstamina: 0
+  stamina: 0
+  maxStamina: 2400
   controller: {fileID: 1150530660}
   cameraObj: {fileID: 963194227}
 --- !u!1 &1458633797

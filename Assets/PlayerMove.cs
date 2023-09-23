@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed;
+    public float tiredSpeed;
+    public float normalSpeed;
+    public float sprintSpeed;
     public Vector3 offset;
     public float jumpForce;
     public float gravityScale;
     public float maxFallSpeed;
     public float Sensitivity;
-    public bool candash = false;
     public bool isGrounded=false;
+    public bool outofstamina = false;
+    public float stamina = 0;
+    public float maxStamina = 240;
     public CharacterController controller;
     public Camera cameraObj;
 
@@ -55,6 +60,31 @@ public class PlayerMove : MonoBehaviour
         moveDirection = (transform.forward * Input.GetAxisRaw("Vertical") * moveSpeed) + (transform.right * Input.GetAxisRaw("Horizontal") * moveSpeed);
         moveDirection = moveDirection.normalized * moveSpeed;
         moveDirection.y = ystore;
+        if(Input.GetButton("Sprint")&&!outofstamina)
+        {
+            moveSpeed = sprintSpeed;
+            stamina--;
+        }
+        else
+        {
+            moveSpeed = normalSpeed;
+            if(outofstamina)
+            {
+                moveSpeed = tiredSpeed;
+            }
+            if (stamina<maxStamina)
+            {
+                stamina++;
+            }
+        }
+        if(stamina<=0)
+        {
+            outofstamina = true;
+        }
+        if (stamina >maxStamina*0.9)
+        {
+            outofstamina = false;
+        }
         if (controller.isGrounded)
         {
             moveDirection.y = -1;

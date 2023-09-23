@@ -25,31 +25,30 @@ public class PlayerMove : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         isGrounded = controller.isGrounded;
-        if (controller.isGrounded)
-        {
-            
-        }
         float h = Input.GetAxis("Mouse X") * Sensitivity;
-        transform.Rotate(0, h, 0);
+        cameraObj.transform.Rotate(0, h, 0);
 
         float v = Input.GetAxis("Mouse Y") * Sensitivity;
-        transform.Rotate(-v, 0, 0);
+        cameraObj.transform.Rotate(-v, 0, 0);
         float maxViewAngle = 65f;
         float minViewAngle = -60f;
-        if (transform.rotation.eulerAngles.x > maxViewAngle && transform.rotation.eulerAngles.x < 180.0f)
+        if (cameraObj.transform.rotation.eulerAngles.x > maxViewAngle && cameraObj.transform.rotation.eulerAngles.x < 180.0f)
         {
-            transform.rotation = Quaternion.Euler(maxViewAngle, transform.eulerAngles.y, 0.0f);
+            cameraObj.transform.rotation = Quaternion.Euler(maxViewAngle, cameraObj.transform.eulerAngles.y, 0.0f);
         }
 
-        if (transform.rotation.eulerAngles.x > 180.0f && transform.rotation.eulerAngles.x < 360f + minViewAngle)
+        if (cameraObj.transform.rotation.eulerAngles.x > 180.0f && cameraObj.transform.rotation.eulerAngles.x < 360f + minViewAngle)
         {
-            transform.rotation = Quaternion.Euler(360.0f + minViewAngle, transform.eulerAngles.y, 0.0f);
+            cameraObj.transform.rotation = Quaternion.Euler(360.0f + minViewAngle, cameraObj.transform.eulerAngles.y, 0.0f);
         }
 
-        float desiredYAngle = transform.eulerAngles.y;
-        float desiredXAngle = transform.eulerAngles.x;
+        float desiredYAngle = cameraObj.transform.eulerAngles.y;
+        float desiredXAngle = cameraObj.transform.eulerAngles.x;
         Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0);
+        cameraObj.transform.rotation = rotation;
+        rotation = Quaternion.Euler(0, desiredYAngle, 0);
         transform.rotation = rotation;
+        cameraObj.transform.position = transform.position;
 
         //moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, Input.GetAxis("Vertical") * moveSpeed);
         float ystore = moveDirection.y;

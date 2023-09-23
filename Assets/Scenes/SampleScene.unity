@@ -592,8 +592,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   offset: {x: 0, y: 0, z: 0}
-  jumpForce: 15
-  gravityScale: 0.25
+  jumpForce: 7.5
+  gravityScale: 0.1
   maxFallSpeed: 20
   Sensitivity: 2
   candash: 0

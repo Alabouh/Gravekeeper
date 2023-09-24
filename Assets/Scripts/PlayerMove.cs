@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     public float maxStamina = 240;
     public CharacterController controller;
     public Camera cameraObj;
+    public GameObject hpbar;
 
     private Vector3 moveDirection;
     void Start()
@@ -28,6 +29,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        hpbar.transform.position = new Vector3(0,0,0);
+        hpbar.transform.localScale = new Vector3((stamina/maxStamina),(float)0.3, (float)0.3);
         Cursor.lockState = CursorLockMode.Locked;
         isGrounded = controller.isGrounded;
         float h = Input.GetAxis("Mouse X") * Sensitivity;
